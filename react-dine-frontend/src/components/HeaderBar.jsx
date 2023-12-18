@@ -12,7 +12,7 @@ const HeaderBar = () => {
 
   return (
     <header>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <Box display="flex" justifyContent="space-between" width="100%">
             <Button
