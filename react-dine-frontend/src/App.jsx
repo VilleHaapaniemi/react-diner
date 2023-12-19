@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import "./App.css";
 import Cart from "./pages/Cart";
 import RootLayout from "./pages/RootLayout";
+import { CartProvider } from "./contexts/CartContext";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
     </>
   );
 }
