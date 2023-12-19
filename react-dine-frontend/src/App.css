@@ -5,3 +5,13 @@ body {
   margin: 0;
   padding-top: 8vh;
 }
+
+/* Removes increment and decrement arrows from number TextView */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}

@@ -3,7 +3,11 @@ import { createContext, useState } from "react";
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(
+    localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : []
+  );
 
   const addToCart = (dish) => {
     setCartItems((prevCartItems) => {
@@ -36,7 +40,6 @@ export const CartProvider = ({ children }) => {
           return prevCartItems.filter((item) => item.id !== dishId);
         }
       } else {
-        // If the item is not in the cart, return the previous cart items
         return prevCartItems;
       }
     });
@@ -49,10 +52,16 @@ export const CartProvider = ({ children }) => {
       if (itemInCart) {
         return prevCartItems.filter((item) => item.id !== dishId);
       } else {
-        // If the item is not in the cart, return the previous cart items
         return prevCartItems;
       }
     });
+  };
+
+  const getCartItemsIdAndQuantity = () => {
+    return cartItems.map((item) => ({
+      id: item.id,
+      quantity: item.quantity,
+    }));
   };
 
   return (
@@ -62,6 +71,7 @@ export const CartProvider = ({ children }) => {
         addToCart,
         decrementQuantityFromCart,
         removeFromCart,
+        getCartItemsIdAndQuantity,
       }}
     >
       {children}
