@@ -21,7 +21,7 @@ const HeaderBar = () => {
               startIcon={<RestaurantIcon />}
               onClick={() => navigate("/")}
             >
-              <Typography>Restaurant</Typography>
+              <Typography>MENU</Typography>
             </Button>
             <Button
               size="large"

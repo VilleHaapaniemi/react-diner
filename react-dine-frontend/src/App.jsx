@@ -4,6 +4,8 @@ import "./App.css";
 import CartPage from "./pages/CartPage";
 import RootLayout from "./pages/RootLayout";
 import { CartProvider } from "./contexts/CartContext";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "./utils/theme";
 
 const router = createBrowserRouter([
   {
@@ -19,9 +21,11 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <CartProvider>
-        <RouterProvider router={router} />
-      </CartProvider>
+      <ThemeProvider theme={theme}>
+        <CartProvider>
+          <RouterProvider router={router} />
+        </CartProvider>
+      </ThemeProvider>
     </>
   );
 }

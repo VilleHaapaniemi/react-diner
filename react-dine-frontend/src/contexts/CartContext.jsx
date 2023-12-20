@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
           item.id === dish.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        // If the item is not in the cart, add it with a quantity of 1
+        // Else add it with a quantity of 1
         return [...prevCartItems, { ...dish, quantity: 1 }];
       }
     });
@@ -36,7 +36,7 @@ export const CartProvider = ({ children }) => {
             item.id === dishId ? { ...item, quantity: item.quantity - 1 } : item
           );
         } else {
-          // If the item is in the cart and its quantity is 1, remove the item from the cart
+          // If quantity is 1, remove the item from the cart
           return prevCartItems.filter((item) => item.id !== dishId);
         }
       } else {
@@ -65,10 +65,14 @@ export const CartProvider = ({ children }) => {
   };
 
   const getTotalPrice = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
+    return (
+      Math.round(
+        cartItems.reduce(
+          (total, item) => total + item.price * item.quantity,
+          0
+        ) * 100
+      ) / 100
+    ).toFixed(2);
   };
 
   return (

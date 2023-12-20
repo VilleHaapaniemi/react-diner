@@ -1,3 +1,11 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Cardo", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+@font-face {
+  font-family: "Cardo";
+  font-style: normal;
+  font-weight: 500;
+  src: local("Cardo Regular"), local("Cardo-Regular"),
+    url("/fonts/cardo/Cardo-Regular.ttf") format("ttf");
 }

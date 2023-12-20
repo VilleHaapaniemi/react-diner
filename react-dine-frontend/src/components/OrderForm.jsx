@@ -5,6 +5,7 @@ import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Box, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import OrderConfirmationModal from "./OrderConfirmationModal";
 
 const OrderForm = () => {
@@ -55,76 +56,127 @@ const OrderForm = () => {
         noValidate
         autoComplete="off"
       >
-        <Controller
-          name="name"
-          control={control}
-          defaultValue=""
-          rules={{ required: { value: true, message: "Required" } }}
-          render={({ field }) => (
-            <TextField {...field} label="Name" variant="outlined" />
-          )}
-        />
-        <Controller
-          name="email"
-          control={control}
-          defaultValue=""
-          rules={{
-            required: { value: true, message: "Required" },
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Must be valid email address structure
-              message: "Invalid email address",
-            },
-          }}
-          render={({ field }) => (
-            <Box>
-              <TextField {...field} label="Email" variant="outlined" />
-              {errors["email"] && <p>{errors["email"].message}</p>}
-            </Box>
-          )}
-        />
-        <Controller
-          name="street"
-          control={control}
-          defaultValue=""
-          rules={{ required: { value: true, message: "Required" } }}
-          render={({ field }) => (
-            <TextField {...field} label="Street" variant="outlined" />
-          )}
-        />
-        <Controller
-          name="postal-code"
-          control={control}
-          defaultValue=""
-          rules={{
-            required: { value: true, message: "Required" },
-            pattern: { value: /^[0-9]+$/, message: "Only numbers are allowed" },
-          }}
-          render={({ field }) => (
-            <Box>
-              <TextField
-                {...field}
-                label="Postal Code"
-                variant="outlined"
-                type="number"
-              />
-              {errors["postal-code"] && (
-                <Typography>{errors["postal-code"].message}</Typography>
+        <Grid sx={{ margin: "1rem", width: "40vw" }} container spacing={1}>
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              Please provide the following information for your order
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Controller
+              name="name"
+              control={control}
+              defaultValue=""
+              rules={{ required: { value: true, message: "Required" } }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  label="Name"
+                  variant="outlined"
+                  error={errors["name"]}
+                  helperText={errors["name"] ? errors["name"].message : ""}
+                />
               )}
-            </Box>
-          )}
-        />
-        <Controller
-          name="city"
-          control={control}
-          defaultValue=""
-          rules={{ required: { value: true, message: "Required" } }}
-          render={({ field }) => (
-            <TextField {...field} label="City" variant="outlined" />
-          )}
-        />
-        <Button type="submit" variant="contained">
-          SUBMIT
-        </Button>
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Controller
+              name="email"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: { value: true, message: "Required" },
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Must be valid email address structure
+                  message: "Invalid email address",
+                },
+              }}
+              render={({ field }) => (
+                <Box>
+                  <TextField
+                    {...field}
+                    fullWidth
+                    label="Email"
+                    variant="outlined"
+                    error={errors["email"]}
+                    helperText={errors["email"] ? errors["email"].message : ""}
+                  />
+                </Box>
+              )}
+            />
+          </Grid>
+          <Grid item xs={8}>
+            <Controller
+              name="city"
+              control={control}
+              defaultValue=""
+              rules={{ required: { value: true, message: "Required" } }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  label="City"
+                  variant="outlined"
+                  error={errors["city"]}
+                  helperText={errors["city"] ? errors["city"].message : ""}
+                />
+              )}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Controller
+              name="postal-code"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: { value: true, message: "Required" },
+                pattern: {
+                  value: /^[0-9]+$/,
+                  message: "Only numbers are allowed",
+                },
+              }}
+              render={({ field }) => (
+                <Box>
+                  <TextField
+                    {...field}
+                    fullWidth
+                    label="Postal Code"
+                    variant="outlined"
+                    type="number"
+                    error={errors["postal-code"]}
+                    helperText={
+                      errors["postal-code"] ? errors["postal-code"].message : ""
+                    }
+                  />
+                </Box>
+              )}
+            />
+          </Grid>
+          <Grid item xs={8}>
+            <Controller
+              name="street"
+              control={control}
+              defaultValue=""
+              rules={{ required: { value: true, message: "Required" } }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  label="Street"
+                  variant="outlined"
+                  error={errors["street"]}
+                  helperText={errors["street"] ? errors["street"].message : ""}
+                />
+              )}
+            />
+          </Grid>
+          <Grid item xs={12} sx={{ display: "flex" }}>
+            <Button type="submit" variant="contained">
+              MAKE ORDER
+            </Button>
+          </Grid>
+        </Grid>
       </form>
 
       <OrderConfirmationModal
