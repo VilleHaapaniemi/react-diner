@@ -129,7 +129,7 @@ const OrderForm = () => {
 
       <OrderConfirmationModal
         isConfirmationModalOpen={isConfirmationModalOpen}
-        onCloseModal={handleCloseModal}
+        closeModal={handleCloseModal}
         onConfirmOrder={submitOrder}
         customerData={customerData}
       />
