@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { CartContext } from "../contexts/CartContext";
 import axios from "axios";
+import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Box, Typography } from "@mui/material";
@@ -14,10 +15,19 @@ const OrderForm = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, submitCount, isValid },
   } = useForm();
 
   const { getCartItemsIdAndQuantity } = useContext(CartContext);
+
+  const pageRef = useRef(null);
+
+  useEffect(() => {
+    // If form have validation errors scroll the page to page bottom to set focus on form
+    if (!isValid && submitCount > 0) {
+      pageRef.current.scrollIntoView({ behaviour: "smooth" });
+    }
+  }, [submitCount, isValid]);
 
   const onSubmitCustomerForm = (customerData) => {
     setCustomerData(customerData);
@@ -50,7 +60,15 @@ const OrderForm = () => {
   };
 
   return (
-    <>
+    <Container
+      maxWidth="md"
+      ref={pageRef}
+      sx={{
+        backgroundColor: "whitesmoke",
+        paddingBottom: "3rem",
+        marginBottom: "3rem",
+      }}
+    >
       <form
         onSubmit={handleSubmit(onSubmitCustomerForm)}
         noValidate
@@ -74,7 +92,7 @@ const OrderForm = () => {
                   fullWidth
                   label="Name"
                   variant="outlined"
-                  error={errors["name"]}
+                  error={errors["name"] ? true : false}
                   helperText={errors["name"] ? errors["name"].message : ""}
                 />
               )}
@@ -99,7 +117,7 @@ const OrderForm = () => {
                     fullWidth
                     label="Email"
                     variant="outlined"
-                    error={errors["email"]}
+                    error={errors["email"] ? true : false}
                     helperText={errors["email"] ? errors["email"].message : ""}
                   />
                 </Box>
@@ -118,7 +136,7 @@ const OrderForm = () => {
                   fullWidth
                   label="City"
                   variant="outlined"
-                  error={errors["city"]}
+                  error={errors["city"] ? true : false}
                   helperText={errors["city"] ? errors["city"].message : ""}
                 />
               )}
@@ -144,7 +162,7 @@ const OrderForm = () => {
                     label="Postal Code"
                     variant="outlined"
                     type="number"
-                    error={errors["postal-code"]}
+                    error={errors["postal-code"] ? true : false}
                     helperText={
                       errors["postal-code"] ? errors["postal-code"].message : ""
                     }
@@ -165,7 +183,7 @@ const OrderForm = () => {
                   fullWidth
                   label="Street"
                   variant="outlined"
-                  error={errors["street"]}
+                  error={errors["street"] ? true : false}
                   helperText={errors["street"] ? errors["street"].message : ""}
                 />
               )}
@@ -185,7 +203,7 @@ const OrderForm = () => {
         onConfirmOrder={submitOrder}
         customerData={customerData}
       />
-    </>
+    </Container>
   );
 };
 

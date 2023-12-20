@@ -19,8 +19,6 @@ const Cart = () => {
       maxWidth="md"
       sx={{
         backgroundColor: "whitesmoke",
-        height: "max-content",
-        margin: "1rem",
       }}
     >
       <Typography variant="h5" sx={{ textDecoration: "underline" }}>
