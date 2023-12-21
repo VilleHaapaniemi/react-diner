@@ -10,7 +10,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import { theme } from "../utils/theme";
 
 const OrderConfirmationModal = ({
   isConfirmationModalOpen,
@@ -21,70 +21,160 @@ const OrderConfirmationModal = ({
   const { cartItems, getTotalPrice } = useContext(CartContext);
 
   return (
-    <Modal
-      open={isConfirmationModalOpen}
-      onClose={closeModal}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
+    <Modal open={isConfirmationModalOpen} onClose={closeModal}>
       <Box sx={modalStyle}>
-        <Typography variant="h4">Please confirm your order</Typography>
-        <Typography variant="h5">Customer</Typography>
-        {isConfirmationModalOpen && (
-          <TableContainer component={Paper}>
+        <Typography
+          variant="h4"
+          sx={{ alignSelf: "center", color: theme.palette.primaryBeige.main }}
+        >
+          Please confirm your order
+        </Typography>
+
+        <Box sx={{ marginTop: "0.5rem" }}>
+          <Typography
+            variant="h5"
+            sx={{ color: theme.palette.primaryBeige.main }}
+          >
+            Customer
+          </Typography>
+          {isConfirmationModalOpen && (
+            <TableContainer
+              sx={{
+                marginTop: "0.5rem",
+                backgroundColor: theme.palette.secondaryBeige.main,
+                borderRadius: "0.5rem",
+                "& .MuiTableCell-root": {
+                  borderBottom: "1px solid",
+                  borderColor: theme.palette.primaryRed.main,
+                },
+              }}
+            >
+              <Table size="small" aria-label="a dense table">
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>{customerData.name}</TableCell>
+                  </TableRow>
+                  <TableRow
+                    sx={{ backgroundColor: theme.palette.primaryBeige.main }}
+                  >
+                    <TableCell>Email</TableCell>
+                    <TableCell>{customerData.email}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Street</TableCell>
+                    <TableCell>{customerData.street}</TableCell>
+                  </TableRow>
+                  <TableRow
+                    sx={{ backgroundColor: theme.palette.primaryBeige.main }}
+                  >
+                    <TableCell>Postal-code</TableCell>
+                    <TableCell>{customerData["postal-code"]}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>City</TableCell>
+                    <TableCell>{customerData.city}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
+        </Box>
+
+        <Box sx={{ marginTop: "0.5rem" }}>
+          <Typography
+            variant="h5"
+            sx={{ color: theme.palette.primaryBeige.main }}
+          >
+            Order
+          </Typography>
+          <TableContainer
+            sx={{
+              marginTop: "0.5rem",
+              borderRadius: "0.5rem",
+              "& .MuiTableCell-root": {
+                borderBottom: "1px solid",
+                borderColor: theme.palette.primaryRed.main,
+              },
+            }}
+          >
             <Table size="small" aria-label="a dense table">
+              <TableHead>
+                <TableRow
+                  sx={{
+                    backgroundColor: theme.palette.primaryBeige.dark,
+                  }}
+                >
+                  <TableCell>Meal</TableCell>
+                  <TableCell align="center">Quantity</TableCell>
+                  <TableCell align="right">Price</TableCell>
+                </TableRow>
+              </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>{customerData.name}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Email</TableCell>
-                  <TableCell>{customerData.email}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Street</TableCell>
-                  <TableCell>{customerData.street}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Postal-code</TableCell>
-                  <TableCell>{customerData["postal-code"]}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>City</TableCell>
-                  <TableCell>{customerData.city}</TableCell>
-                </TableRow>
+                {cartItems.map((row, index) => (
+                  <TableRow
+                    key={row.id}
+                    sx={{
+                      backgroundColor:
+                        index % 2 === 0
+                          ? theme.palette.secondaryBeige.main
+                          : theme.palette.primaryBeige.main,
+                    }}
+                  >
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell align="center">{row.quantity}</TableCell>
+                    <TableCell align="right">
+                      {row.price * row.quantity}
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>
-        )}
-        <Typography variant="h5">Order</Typography>
-        <TableContainer component={Paper}>
-          <Table size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Meal</TableCell>
-                <TableCell align="center">Quantity</TableCell>
-                <TableCell align="right">Price</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {cartItems.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell align="center">{row.quantity}</TableCell>
-                  <TableCell align="right">
-                    {row.price * row.quantity}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Typography variant="h5">Total price: {getTotalPrice()}</Typography>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Button onClick={onConfirmOrder}>MAKE ORDER</Button>
-          <Button onClick={closeModal}>EDIT ORDER</Button>
+        </Box>
+
+        <Typography
+          variant="h5"
+          sx={{
+            color: theme.palette.primaryBeige.main,
+            alignSelf: "flex-end",
+            marginTop: "0.5rem",
+          }}
+        >
+          Total price: {getTotalPrice()}
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "0.5rem",
+            marginBottom: "0.3rem",
+          }}
+        >
+          <Button
+            sx={{
+              color: theme.palette.primaryRed.main,
+              backgroundColor: theme.palette.secondaryBeige.main,
+              "&:hover": {
+                backgroundColor: theme.palette.primaryBeige.main,
+              },
+            }}
+            onClick={closeModal}
+          >
+            <Typography>EDIT ORDER</Typography>
+          </Button>
+          <Button
+            sx={{
+              color: theme.palette.primaryRed.main,
+              backgroundColor: theme.palette.primaryBeige.dark,
+              "&:hover": {
+                backgroundColor: theme.palette.primaryBeige.darkest,
+              },
+            }}
+            onClick={onConfirmOrder}
+          >
+            <Typography>MAKE ORDER</Typography>
+          </Button>
         </Box>
       </Box>
     </Modal>
@@ -99,8 +189,11 @@ const modalStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  backgroundColor: theme.palette.primaryRed.main,
+  border: `2px solid ${theme.palette.primaryBeige.main}`,
+  borderRadius: "1rem",
   boxShadow: 24,
-  p: 4,
+  padding: "0.5rem 3rem",
+  display: "flex",
+  flexDirection: "column",
 };

@@ -62,7 +62,7 @@ const CartItem = ({ cartItem }) => {
               width: "fit-content",
               border: `1px solid ${theme.palette.secondaryRed.main}`,
               borderRadius: "8px",
-              backgroundColor: theme.palette.primaryBeigeDarker.main,
+              backgroundColor: theme.palette.primaryBeige.dark,
               boxShadow: 4,
             }}
           >

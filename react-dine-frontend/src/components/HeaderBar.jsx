@@ -25,7 +25,7 @@ const HeaderBar = () => {
                 color: theme.palette.primaryRed.main,
                 backgroundColor: theme.palette.primaryBeige.main,
                 "&:hover": {
-                  backgroundColor: theme.palette.primaryBeigeDarker.main,
+                  backgroundColor: theme.palette.primaryBeige.dark,
                 },
               }}
               startIcon={<RestaurantIcon />}
@@ -39,7 +39,7 @@ const HeaderBar = () => {
                 color: theme.palette.primaryRed.main,
                 backgroundColor: theme.palette.primaryBeige.main,
                 "&:hover": {
-                  backgroundColor: theme.palette.primaryBeigeDarker.main,
+                  backgroundColor: theme.palette.primaryBeige.dark,
                 },
               }}
               startIcon={<ShoppingCartIcon />}

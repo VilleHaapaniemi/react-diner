@@ -5,7 +5,6 @@ import {
   secondaryRed,
   primaryBeige,
   secondaryBeige,
-  primaryBeigeDarker,
 } from "./colors";
 
 export const theme = createTheme({
@@ -30,11 +29,15 @@ export const theme = createTheme({
     secondaryRed: secondaryRed,
     primaryBeige: primaryBeige,
     secondaryBeige: secondaryBeige,
-    primaryBeigeDarker: primaryBeigeDarker,
   },
 });
 
 export const formTheme = createTheme({
+  typography: {
+    fontSize: 15,
+    fontWeightRegular: 500,
+    fontFamily: "Cardo",
+  },
   components: {
     MuiTextField: {
       styleOverrides: {

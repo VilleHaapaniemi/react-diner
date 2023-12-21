@@ -10,11 +10,8 @@ export const secondaryRed = {
 
 export const primaryBeige = {
   main: "#FACE7F",
-  contrastText: "#ffffff",
-};
-
-export const primaryBeigeDarker = {
-  main: "#ECAB35",
+  dark: "#ECAB35",
+  darkest: "#e19507",
   contrastText: "#ffffff",
 };
 
