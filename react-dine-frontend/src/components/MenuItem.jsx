@@ -5,6 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
+import { theme } from "../utils/theme";
 
 const MenuItem = ({ dish }) => {
   const imgUrl = `http://localhost:5000/${dish.image}`;
@@ -21,6 +22,9 @@ const MenuItem = ({ dish }) => {
         flexDirection: "row",
         width: "100%",
         padding: "1rem",
+        backgroundColor: theme.palette.primaryBeige.main,
+        boxShadow: 10,
+        borderRadius: "0.5rem",
       }}
     >
       <CardMedia
@@ -43,8 +47,18 @@ const MenuItem = ({ dish }) => {
           }}
         >
           <Typography variant="h5">{dish.price} €</Typography>
-          <Button variant="contained" onClick={addDishToCart}>
-            Add to cart
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: theme.palette.secondaryRed.main,
+              color: theme.palette.primaryBeige.main,
+              "&:hover": {
+                backgroundColor: theme.palette.primaryRed.main,
+              },
+            }}
+            onClick={addDishToCart}
+          >
+            <Typography>ADD TO CART</Typography>
           </Button>
         </Box>
       </CardContent>

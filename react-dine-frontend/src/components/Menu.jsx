@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import MenuItem from "./MenuItem";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import { theme } from "../utils/theme";
 
 const Menu = () => {
   const [dishes, setDishes] = useState([]);
@@ -22,7 +23,16 @@ const Menu = () => {
   };
 
   return (
-    <Container maxWidth="md" sx={{ backgroundColor: "whitesmoke" }}>
+    <Container
+      maxWidth="md"
+      sx={{
+        marginTop: "1rem",
+        marginBottom: "2rem",
+        backgroundColor: theme.palette.primaryRed.main,
+        borderRadius: "1rem",
+        boxShadow: 20,
+      }}
+    >
       <List>
         {dishes.map((dish) => (
           <ListItem key={dish.id}>

@@ -3,7 +3,8 @@
 }
 body {
   margin: 0;
-  padding-top: 8vh;
+  padding-top: 64px; /* Height of top AppBar */
+  background-color: #fcf0c8;
 }
 
 /* Removes increment and decrement arrows from number TextView */

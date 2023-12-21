@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ClearIcon from "@mui/icons-material/Clear";
+import { theme } from "../utils/theme";
 
 const CartItem = ({ cartItem }) => {
   const { addToCart, decrementQuantityFromCart, removeFromCart } =
@@ -30,6 +31,8 @@ const CartItem = ({ cartItem }) => {
         display: "flex",
         flexDirection: "row",
         width: "100%",
+        backgroundColor: theme.palette.primaryBeige.main,
+        boxShadow: 4,
       }}
     >
       <CardContent
@@ -42,7 +45,9 @@ const CartItem = ({ cartItem }) => {
           // MUI default Card padding bottom is overrided in utils/theme.jsx (MUI CreateTheme)
         }}
       >
-        <Typography sx={{ flex: 5 }}>{cartItem.name}</Typography>
+        <Typography variant="h6" sx={{ flex: 5 }}>
+          {cartItem.name}
+        </Typography>
         <Box
           sx={{
             flex: 4,
@@ -55,9 +60,10 @@ const CartItem = ({ cartItem }) => {
               display: "flex",
               alignItems: "center",
               width: "fit-content",
-              border: "1px solid gray",
+              border: `1px solid ${theme.palette.secondaryRed.main}`,
               borderRadius: "8px",
-              backgroundColor: "lightgray",
+              backgroundColor: theme.palette.primaryBeigeDarker.main,
+              boxShadow: 4,
             }}
           >
             <IconButton
@@ -79,7 +85,7 @@ const CartItem = ({ cartItem }) => {
             </IconButton>
           </Box>
         </Box>
-        <Typography sx={{ flex: 2 }}>
+        <Typography variant="h6" sx={{ flex: 2 }}>
           {(Math.round(cartItem.price * cartItem.quantity * 100) / 100).toFixed(
             2
           )}
