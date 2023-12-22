@@ -19,7 +19,12 @@ const MenuSkeleton = () => {
           borderRadius: "0.5rem",
         }}
       >
-        <Skeleton variant="rectangular" width={150} height={150} />
+        <Skeleton
+          variant="rectangular"
+          width={180}
+          height={150}
+          sx={{ borderRadius: "1rem" }}
+        />
         <Box
           sx={{
             display: "flex",
@@ -34,6 +39,7 @@ const MenuSkeleton = () => {
           <Box
             sx={{
               display: "flex",
+              marginTop: "auto",
               justifyContent: "space-between",
               alignItems: "center",
             }}

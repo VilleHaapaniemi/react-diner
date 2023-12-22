@@ -33,7 +33,14 @@ const MenuItem = ({ dish }) => {
         src={imgUrl}
         alt="Dish"
       />
-      <CardContent sx={{ pt: 0, width: "100%" }}>
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          pt: 0,
+          width: "100%",
+        }}
+      >
         <Typography variant="h4">{dish.name}</Typography>
         <Typography variant="body1" sx={{ fontStyle: "italic" }}>
           {dish.description}
@@ -42,7 +49,7 @@ const MenuItem = ({ dish }) => {
           sx={{
             display: "flex",
             alignItems: "center",
-            marginTop: "1em",
+            marginTop: "auto",
             justifyContent: "space-between",
           }}
         >
