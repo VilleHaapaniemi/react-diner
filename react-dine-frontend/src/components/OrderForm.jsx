@@ -11,7 +11,7 @@ import OrderConfirmationModal from "./OrderConfirmationModal";
 import { theme, formTheme } from "../utils/theme";
 import { ThemeProvider } from "@mui/material/styles";
 
-const OrderForm = () => {
+const OrderForm = ({ orderSubmitted }) => {
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [customerData, setCustomerData] = useState();
   const {
@@ -19,9 +19,7 @@ const OrderForm = () => {
     control,
     formState: { errors, submitCount, isValid },
   } = useForm();
-
   const { getCartItemsIdAndQuantity } = useContext(CartContext);
-
   const pageRef = useRef(null);
 
   useEffect(() => {
@@ -52,8 +50,30 @@ const OrderForm = () => {
         orderData
       );
       console.log(response.data);
+      orderSubmitted({
+        result: "success",
+        message: "Your order has been received and is being prepared",
+      });
     } catch (error) {
       console.error(error);
+      if (error.response) {
+        orderSubmitted({
+          result: "error",
+          message:
+            "We're sorry, but there seems to be an issue with our server",
+        });
+      } else if (error.request) {
+        orderSubmitted({
+          result: "error",
+          message:
+            "We're sorry, but there seems to be an issue with your order. Please check your information and try again",
+        });
+      } else {
+        orderSubmitted({
+          result: "error",
+          message: "We're sorry, unknown error occured",
+        });
+      }
     }
   };
 
