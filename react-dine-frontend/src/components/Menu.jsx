@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CartContext } from "../contexts/CartContext";
 import axios from "axios";
 import Container from "@mui/material/Container";
 import MenuItem from "./MenuItem";
@@ -8,12 +9,18 @@ import MenuSkeleton from "./MenuSkeleton";
 import { theme } from "../utils/theme";
 
 const Menu = () => {
+  const { cartItems } = useContext(CartContext);
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchDishes();
   }, []);
+
+  useEffect(() => {
+    // When cartItems change save the updated cart items to localStorage
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const fetchDishes = async () => {
     try {

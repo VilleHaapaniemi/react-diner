@@ -75,6 +75,10 @@ export const CartProvider = ({ children }) => {
     ).toFixed(2);
   };
 
+  const getCartQuantityCount = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
   const clearCart = () => {
     setCartItems([]);
   };
@@ -88,6 +92,7 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         getCartItemsIdAndQuantity,
         getTotalPrice,
+        getCartQuantityCount,
         clearCart,
       }}
     >
