@@ -16,52 +16,65 @@ const Cart = () => {
   }, [cartItems]);
 
   return (
-    <Container
-      maxWidth="md"
-      sx={{
-        marginTop: "1rem",
-        backgroundColor: theme.palette.primaryRed.main,
-        borderRadius: "1rem",
-        boxShadow: 20,
-      }}
-    >
-      <Typography
-        variant="h4"
+    <>
+      <Container
+        maxWidth="md"
         sx={{
-          padding: "0.5rem",
-          textDecoration: "underline",
-          fontStyle: "italic",
-          color: theme.palette.primaryBeige.main,
+          marginTop: "1rem",
+          backgroundColor: theme.palette.primaryRed.main,
+          borderRadius: "1rem",
+          boxShadow: 20,
         }}
       >
-        Your Order
-      </Typography>
-      <List>
-        {cartItems.map((cartItem) => (
-          <ListItem key={cartItem.id}>
-            <CartItem cartItem={cartItem} />
-          </ListItem>
-        ))}
-      </List>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          paddingRight: "1rem",
-        }}
-      >
-        <Typography
-          variant="h4"
-          sx={{
-            color: theme.palette.primaryBeige.main,
-            textDecoration: "underline",
-            paddingBottom: "0.5rem",
-          }}
-        >
-          Total Price: {getTotalPrice()}€
-        </Typography>
-      </Box>
-    </Container>
+        {cartItems.length > 0 ? (
+          <>
+            <Typography
+              variant="h4"
+              sx={{
+                padding: "0.5rem",
+                textDecoration: "underline",
+                fontStyle: "italic",
+                color: theme.palette.primaryBeige.main,
+              }}
+            >
+              Your Order
+            </Typography>
+            <List>
+              {cartItems.map((cartItem) => (
+                <ListItem key={cartItem.id}>
+                  <CartItem cartItem={cartItem} />
+                </ListItem>
+              ))}
+            </List>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                paddingRight: "1rem",
+              }}
+            >
+              <Typography
+                variant="h4"
+                sx={{
+                  color: theme.palette.primaryBeige.main,
+                  textDecoration: "underline",
+                  paddingBottom: "0.5rem",
+                }}
+              >
+                Total Price: {getTotalPrice()}€
+              </Typography>
+            </Box>
+          </>
+        ) : (
+          <Typography
+            variant="h5"
+            sx={{ color: theme.palette.primaryBeige.main, padding: "1rem" }}
+          >
+            Your cart is still empty. Add dishes to cart from our delicious menu
+          </Typography>
+        )}
+      </Container>
+    </>
   );
 };
 
