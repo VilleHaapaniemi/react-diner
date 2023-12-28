@@ -16,10 +16,10 @@ const Menu = () => {
   }, []);
 
   const fetchDishes = async () => {
-    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     try {
-      await delay(2000);
-      const response = await axios.get("http://localhost:5000/api/dishes");
+      const response = await axios.get(
+        "https://reactdiner.azurewebsites.net/api/dishes"
+      );
       setDishes(response.data);
       setLoading(false);
     } catch (error) {

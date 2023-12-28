@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import { theme } from "../utils/theme";
 
 const MenuItem = ({ dish }) => {
-  const imgUrl = `http://localhost:5000/${dish.image}`;
+  const imgUrl = `https://reactdiner.azurewebsites.net/${dish.image}`;
   const { addToCart } = useContext(CartContext);
 
   const addDishToCart = () => {

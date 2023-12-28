@@ -46,7 +46,7 @@ const OrderForm = ({ orderSubmitted }) => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/orders",
+        "https://reactdiner.azurewebsites.net/api/orders",
         orderData
       );
       console.log(response.data);
