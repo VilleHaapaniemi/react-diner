@@ -1,7 +1,7 @@
 # React Diner 🍕🥙
 
 ## Deployed
-https://react-diner-pb6p.onrender.com
+https://diner.onrender.com/
 
 ## Backend
 The backend is running on Azure. The free tier service automatically shuts down and deletes order data. Fetching data for the first time may also take some time if the service was previously shut down.
